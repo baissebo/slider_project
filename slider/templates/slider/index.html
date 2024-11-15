@@ -1,0 +1,188 @@
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/lightbox.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.min.css' %}"/>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 100px;
+            background: #0A121E;
+            height: 70px;
+        }
+
+        .header-titles {
+            display: flex;
+            gap: 30px;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 23px;
+            margin: 0;
+        }
+
+        .container {
+            margin: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .text-content {
+            position: relative;
+            left: 150px;
+        }
+
+        .image-container {
+            align-self: flex-end;
+        }
+
+        .main-image {
+            max-width: 400px;
+            height: auto;
+        }
+
+        .main-title {
+            font-size: 58px;
+            margin-bottom: 20px;
+        }
+
+        .main-description {
+            font-size: 18px;
+            max-width: 645px;
+            line-height: 1.5;
+            height: calc(1.5em * 5);
+        }
+
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            width: 60%;
+            margin: -450px 0;
+        }
+
+        .grid-image-container {
+            text-align: center;
+            width: 40%;
+            padding: 50px;
+        }
+
+        .grid-image {
+            max-width: 50px;
+            height: auto;
+        }
+
+       .slider-container {
+            margin: 450px 0;
+            padding: 50px 0;
+            clear: both;
+        }
+
+        .slider-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 40px;
+        }
+
+        .slider-for img {
+            width: 50%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .slider-nav img {
+            width: 100px;
+            height: auto;
+        }
+
+
+        .slider-nav img.active {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar">
+    <a class="navbar-brand" href="https://www.nasa.gov/">
+        <img src="{% static 'images/nasa.png' %}" alt="NASA Logo">
+    </a>
+    <div class="header-titles">
+        <div class="header-title">Преимущества</div>
+        <div class="header-title">Фотографии</div>
+    </div>
+    <a class="navbar-brand" href="#">
+        <button type="button" class="btn btn-danger">Вход</button>
+    </a>
+</nav>
+
+<div class="container">
+    <div class="text-content">
+        <h2 class="main-title">Космическое агентство</h2>
+        <p class="main-description">Национальное управление по аэронавтике и исследованию космического пространства —
+            ведомство, относящееся к федеральному правительству США и подчиняющееся
+            непосредственно президенту США.</p>
+    </div>
+    <div class="image-container">
+        <img src="{% static 'images/content space.png' %}" alt="content space" class="main-image">
+    </div>
+</div>
+
+<div class="image-grid">
+    <div class="grid-image-container">
+        <img src="{% static 'images/shuttle-space.png' %}" alt="shuttle-space" class="grid-image">
+        <h6>Спейс шаттлы — пилотируемые корабли</h6>
+    </div>
+    <div class="grid-image-container">
+        <img src="{% static 'images/telescope.png' %}" alt="telescope" class="grid-image">
+        <h6>Лучшее телескопическое оборудование</h6>
+    </div>
+    <div class="grid-image-container">
+        <img src="{% static 'images/moon-stars.png' %}" alt="moon-stars" class="grid-image">
+        <h6>Целимся на Луну и Марс</h6>
+    </div>
+    <div class="grid-image-container">
+        <img src="{% static 'images/medal.png' %}" alt="medal" class="grid-image">
+        <h6>Золотая медаль по научным исследованиям</h6>
+    </div>
+</div>
+
+{% if slider_images %}
+<div class="slider-container">
+    <h2 class="slider-title">Фотографии</h2>
+    <div class="slider-for">
+        {% for slide in slider_images %}
+        <div>
+            <a href="{{ slide.image.url }}" data-lightbox="gallery" data-title="{{ slide.title }}">
+                <img src="{{ slide.image.url }}" class="img-fluid" alt="Слайд">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="slider-nav">
+        {% for slide in slider_images %}
+        <div>
+            <img src="{{ slide.image.url }}" class="img-fluid" alt="Миниатюра">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<script src="{% static 'js/lightbox-plus-jquery.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

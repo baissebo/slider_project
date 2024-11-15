@@ -4,3 +4,4 @@ mysqlclient
 django-filer
 django-admin-sortable2
 black
+easy-thumbnails
